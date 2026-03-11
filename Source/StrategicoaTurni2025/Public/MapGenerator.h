@@ -10,6 +10,7 @@ struct FGridCell
 {
     GENERATED_BODY()
 
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid Data")
     int32 X = 0;
 
@@ -38,6 +39,11 @@ protected:
     virtual void BeginPlay() override;
 
 public:
+
+    // Mappa fissa oppure no
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Map Settings")
+    bool bUseRandomSeed = true;
+
     // Parametri esposti ai Blueprint per essere configurati dal Widget
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Map Settings")
     int32 GridSizeX = 25;
@@ -68,5 +74,11 @@ public:
 
     // Funzione richiamabile dai Blueprint per generare la griglia
     UFUNCTION(BlueprintCallable, Category = "Map Generation")
+    
+
     void GenerateGridData();
+
+    private:
+        // La funzione "Secchiello" che controlla se le celle sono tutte collegate
+        bool IsMapFullyConnected();
 };
